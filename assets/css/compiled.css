@@ -1,0 +1,44 @@
+.container {
+  width: 600px;
+  margin: 0 auto; }
+
+input[name="newToDoItem"] {
+  padding: 10px;
+  width: 50%; }
+
+.typcn-plus-outline {
+  font-size: 2em;
+  vertical-align: middle; }
+
+span.typcn {
+  cursor: pointer;
+  transition: all .25s ease;
+  opacity: .5;
+  font-size: 1.618em; }
+  span.typcn:hover {
+    transform: rotate(360deg);
+    opacity: 1; }
+
+.typcn-times-outline:hover {
+  color: #990000; }
+
+.typcn-pin-outline:hover {
+  color: #6666ff; }
+
+.typcn-tick-outline:hover {
+  color: green; }
+
+input.todoitem-input {
+  padding: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 50%;
+  border-color: transparent;
+  font-size: 1.218em;
+  opacity: 1;
+  transition: all .3s ease; }
+  input.todoitem-input:disabled {
+    color: black;
+    opacity: .5; }
+
+/*# sourceMappingURL=compiled.css.map */

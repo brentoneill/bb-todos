@@ -1,0 +1,41 @@
+span.typcn {
+  cursor:pointer;
+  transition:all .25s ease;
+  opacity:.5;
+  font-size:1.618em;
+  &:hover{
+    transform:rotate(360deg);
+    opacity:1;
+  }
+}
+
+.typcn-times-outline {
+  &:hover{
+    color:darken(red, 20%);
+  }
+}
+.typcn-pin-outline {
+  &:hover{
+    color:lighten(blue, 20%);
+  }
+}
+.typcn-tick-outline {
+  &:hover{
+    color:green;
+  }
+}
+
+input.todoitem-input {
+  padding:10px;
+  margin-left:10px;
+  margin-right:10px;
+  width:50%;
+  border-color:rgba(0,0,0,0);
+  font-size:1.218em;
+  opacity:1;
+  transition: all .3s ease;
+  &:disabled {
+    color:black;
+    opacity:.5;
+  }
+}
