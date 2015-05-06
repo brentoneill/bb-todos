@@ -39,3 +39,14 @@ input.todoitem-input {
     opacity:.5;
   }
 }
+
+.complete {
+  input {
+    text-decoration:line-through;
+  }
+}
+.important {
+  input{
+    background-color:lighten(yellow, 25%);
+  }
+}

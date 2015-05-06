@@ -3,25 +3,35 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="stylesheet" href="bower_components/typicons/src/font/typicons.css">
+  <link rel="stylesheet" href="lib/typicons/typicons.css">
   <link rel="stylesheet" href="assets/css/compiled.css">
 
-  <title>Backbone To-Do List application</title>
+  <title>Backbone To-Do's</title>
 </head>
 <body>
+
+<script type="text/dust" id="todoItemTemplate">
+  <div class="{?complete}complete{/complete} {?important}important{/important}">
+    <span class="typcn {?complete}typcn-tick-outline{:else}typcn-media-record-outline{/complete}"></span>
+    <input type="text" class="todoitem-input" name="itemname{_id}" value="{name}" disabled>
+    <span class="typcn typcn-times-outline"></span> <span class="typcn typcn-pin-outline"></span>
+  </div>
+</script>
+
 
 <div class="container">
   <h1>BB To-Dos</h1>
   <section class="todo-list">
     <p>
-      <input type="text" name="newToDoItem" placeholder="What do you need to do???">
+      <a href="" id="completeAll"><span class="typcn typcn-arrow-sorted-down"></span></a>
+      <input autofocus type="text" class="newToDo" name="newToDoItem" placeholder="What do you need to do???">
       <a href="" id="createItem"><span class="typcn typcn-plus-outline"></span></a>
     </p>
     <div class="todo-items">
       <!-- To-do items go here -->
     </div>
     <div class="todo-controls">
-
+      <!-- To-do controls go here -->
     </div>
   </section>
 </div>
@@ -30,16 +40,21 @@
 
 
 <!-- Bower Components -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/underscore/underscore-min.js"></script>
-<script src="bower_components/backbone/backbone.js"></script>
+<script src="lib/jquery/jquery.js"></script>
+<script src="lib/moment/moment.js"></script>
+<script src="lib/underscore/underscore.js"></script>
+<script src="lib/backbone/backbone.js"></script>
+<script src="lib/backbone.babysitter/backbone.babysitter.js"></script>
+<script src="lib/backbone.wreqr/backbone.wreqr.js"></script>
+<script src="lib/marionette/backbone.marionette.js"></script>
+<script src="lib/dustjs-linkedin/dust-full.min.js"></script>
 
 <!--App Files -->
 <script src="assets/js/templates.js"></script>
+<script src="assets/js/templates.dust"></script>
 <script src="assets/js/models.js"></script>
 <script src="assets/js/collections.js"></script>
 <script src="assets/js/views.js"></script>
-
 <script src="assets/js/main.js"></script>
 
 </body>

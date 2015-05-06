@@ -9,6 +9,7 @@ var ToDoItemModel = Backbone.Model.extend({
   },
 
   initialize: function(){
+
   }
 
 });

@@ -1,0 +1,25 @@
+{
+  "name": "bb-todos",
+  "version": "1.0.0",
+  "description": "To-Do List Application using Backbone + Marionette and Dust.js for templating.",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.8.11"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brentoneill/bb-todos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brentoneill/bb-todos/issues"
+  },
+  "homepage": "https://github.com/brentoneill/bb-todos"
+}

@@ -1,6 +1,7 @@
 .container {
   width: 600px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  text-align: center; }
 
 input[name="newToDoItem"] {
   padding: 10px;
@@ -40,5 +41,11 @@ input.todoitem-input {
   input.todoitem-input:disabled {
     color: black;
     opacity: .5; }
+
+.complete input {
+  text-decoration: line-through; }
+
+.important input {
+  background-color: #ffff80; }
 
 /*# sourceMappingURL=compiled.css.map */
