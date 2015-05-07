@@ -10,13 +10,13 @@
 ///////To-Do List Item view
 ///////////////////////////////////////
 var ToDoItemView = Backbone.View.extend({
-  template: _.template(templates.todoitem),
+  //template: _.template(templates.todoitem),
   tpl: $('#todoItemTemplate').html(),
   tagName: 'article',
   className: 'todo-item',
 
   initialize: function(){
-    //Compile template from the HTML string
+    console.log('todo item view init');                        //Compile template from the HTML string
     this.compiledTpl = dust.compile(this.tpl, 'todoItemTpl');
     //Register the template in Dust
     dust.loadSource(this.compiledTpl);
@@ -49,6 +49,10 @@ var ToDoItemView = Backbone.View.extend({
     // this.$el.html(compiled);
 
     //USING DUST.js, rendering and compiling templates client side
+
+    //// compiles, loads, and renders
+    // dust.renderSource(src, { world: "Alpha Centauri" }, function(err, out) { ... });
+
     var data = this.model.toJSON();
     var _self = this;
     dust.render('todoItemTpl', data, function(err, out) {
@@ -67,41 +71,43 @@ var ToDoItemView = Backbone.View.extend({
       var editedItem = {
         name: this.$el.find('input').val(),
         lastEdited: Date.now()
-      }
-      this.model.set(editedItem)
+      };
+      this.model.set(editedItem);
       this.model.save();
       this.$el.find('input').prop("disabled", true);
     }
   },
 
   completeItem: function(e){
+    var editedItem = {};
     if(this.model.attributes.complete){
-      var editedItem = {
+      editedItem = {
         complete: false
-      }
+      };
     }
     else {
-      var editedItem = {
+      editedItem = {
         complete: true
-      }
+      };
     }
-    this.model.set(editedItem)
+    this.model.set(editedItem);
     this.model.save();
     this.render();
   },
 
   highlightItem: function(e){
+    var editedItem = {};
     if(this.model.attributes.important){
-      var editedItem = {
+      editedItem = {
         important: false
-      }
+      };
     }
     else {
-      var editedItem = {
+      editedItem = {
         important: true
-      }
+      };
     }
-    this.model.set(editedItem)
+    this.model.set(editedItem);
     this.model.save();
     this.render();
   },
@@ -129,6 +135,7 @@ var ToDoListView = Backbone.View.extend({
   el: $('section.todo-list'),
 
   initialize:function(){
+    console.log('todo list view init');
     this.addAllToDoItems();
   },
 
@@ -166,14 +173,14 @@ var ToDoListView = Backbone.View.extend({
     };
 
     //Creates a new ToDoItemModel w/ the above object as the data
-    var newToDoItem = new ToDoItemModel(newToDoItem);
+    var itemToAdd = new ToDoItemModel(newToDoItem);
     //Then saves this new model (ajax POST)
-    newToDoItem.save();
+    itemToAdd.save();
 
     //Adds this item to the To Do list as a whole (the collection)
-    this.collection.add(newToDoItem);
+    this.collection.add(itemToAdd);
     //Renders the new to-do item to the to-do list
-    this.addNewItem(newToDoItem);
+    this.addNewItem(itemToAdd);
 
     //Clears out input so that you can input a new to-do item
     this.$el.find('input[name="newToDoItem"]').val('');
@@ -181,14 +188,14 @@ var ToDoListView = Backbone.View.extend({
 
   completeAllItems: function(e){
     e.preventDefault();
-    _.each(this.collection.models, function(item, idx, arr){
-      item.attributes.complete = true;
+    _.each(this.collection.models, function (item, idx, arr) {
+      item.attributes.complete = true ;
       item.save();
-    })
+    });
   },
 
   addToDoItem: function(item){
-    var itemView = new ToDoItemView({ model:item })
+    var itemView = new ToDoItemView({ model:item });
     this.$el.append(itemView.render().el);
   },
 
@@ -198,7 +205,7 @@ var ToDoListView = Backbone.View.extend({
   },
 
   addAllToDoItems: function(){
-    _.each(_.sortBy(this.collection.models, 'dateCreated'), this.addToDoItem, this)
+    _.each(_.sortBy(this.collection.models, 'dateCreated'), this.addToDoItem, this);
   }
 
 });

@@ -2,13 +2,13 @@ var isComplete = function(complete){
   if(complete){
     return "complete";
   }
-}
+};
 
 var isImportant = function(important){
   if(important){
     return "important";
   }
-}
+};
 
 var templates = [];
 
