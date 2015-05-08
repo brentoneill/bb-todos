@@ -13,8 +13,8 @@ var jshint = require('gulp-jshint'),
     livereload = require('gulp-livereload'),
     express = require('express'),
     open = require('gulp-open'),
-    gutil = require('gulp-util');
-
+    gutil = require('gulp-util'),
+    browsersync = require('browser-sync').create();
 
 function startExpress(){
   var app = express();
@@ -26,7 +26,7 @@ function startExpress(){
 gulp.task('lint', function() {
     return gulp.src('assets/js/*.js')
         .pipe(jshint())
-        .pipe(jshint.reporter('default'));
+        .pipe(jshint.reporter('jshint-stylish'));
 });
 
 // Compile Our Sass (NOT VENDOR)
@@ -36,7 +36,7 @@ gulp.task('sass', function() {
         .pipe(sass())
         .pipe(cssmin())
         .pipe(rename({ suffix : '.min' }))
-        .pipe(gulp.dest('dist/assets/css'));        //Default file name is style.css
+        .pipe(gulp.dest('dist/assets/css'));           //Default file name is style.css
 });
 
 // Concatenate & Minify our scripts
@@ -72,25 +72,27 @@ gulp.task('vscripts', function() {
 });
 
 
-//Spins up server and opens the browser
+//Spins up browser sync server
 gulp.task('server', function(){
-  startExpress();                 //Starts the express server on port:4000
-  var options = {
-    url: "http://localhost:4000"
-  };
-  gulp.src("dist/index.html")
-      .pipe(open("", options));   //Opens up your browser to port 4000
+  browsersync.init({
+    server: "./dist"
+  });
+});
+//Browser task
+gulp.task('reload', function(){
+  browsersync.reload();
+  return gutil.log('Reloading your browser....');
 });
 
 // Watch Files For Changes in assets/js (any .js file)
-gulp.task('watch', function() {
+gulp.task('watch',  function() {
     // livereload.listen({ basePath: 'dist' });
-    gulp.watch('assets/js/*.js', ['lint', 'scripts']);  //Lints and concat/minifies these script if a change is detected
-    gulp.watch('assets/scss/*.scss', ['sass']);         //Runs the sass compile found above if changes are made
+    gulp.watch('assets/js/*.js', ['lint', 'scripts', 'reload']);  //Lints and concat/minifies these script if a change is detected
+    gulp.watch('assets/scss/*.scss', ['sass', 'reload']);         //Runs the sass compile found above if changes are made
+
 });
 
 // Default Task - run in terminal by typing 'gulp'. Runs all commands and then runs the watch task directly above.
 gulp.task('default', ['lint', 'sass', 'scripts', 'vscripts', 'server', 'watch'], function(){
-
   return gutil.log('Gulp is running...watching Javascripts and SCSS for changes!');
 });
