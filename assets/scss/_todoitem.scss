@@ -1,10 +1,35 @@
+.highlight-item-wrapper,
+.remove-item-wrapper {
+  display: inline-block;
+  transition:all .3s ease;
+  opacity:0;
+  &:hover {
+    transform:scale(1.2);
+  }
+}
+
+.complete-item-wrapper {
+  opacity:1;
+  &:hover {
+    transform:scale(1.2);
+  }
+}
+
 span.typcn {
   cursor:pointer;
-  transition:all .25s ease;
-  opacity:.5;
+  transition:all .3s ease;
   font-size:1.618em;
   &:hover{
-    transform:rotate(360deg);
+    opacity:1;
+  }
+}
+
+.todo-item {
+  position:relative;
+  &:hover > .remove-item-wrapper {
+    opacity:1;
+  }
+  &:hover > .highlight-item-wrapper {
     opacity:1;
   }
 }
@@ -20,8 +45,9 @@ span.typcn {
   }
 }
 .typcn-tick-outline {
+  color:green;
   &:hover{
-    color:green;
+
   }
 }
 
@@ -29,14 +55,26 @@ input.todoitem-input {
   padding:10px;
   margin-left:10px;
   margin-right:10px;
-  width:50%;
-  border-color:rgba(0,0,0,0);
-  font-size:1.218em;
+  width:75%;
   opacity:1;
   transition: all .3s ease;
+  border:thin solid blue;
+  border-color:rgba(0,0,0,0);
+  &:hover {
+    border:thin solid #39A4BC;
+    box-shadow: 0px 0px 10px rgba(#39A4BC,.5);
+    transform:translateY(-2px)
+  }
   &:disabled {
     color:black;
-    opacity:.5;
+    opacity:.75;
+    user-select:none;
+    -webkit-user-select:none;
+  }
+  &:focus {
+    outline:none;
+    border:thin solid #39A4BC;
+    box-shadow: 0px 0px 20px rgba(#39A4BC,.8);
   }
 }
 
@@ -44,9 +82,18 @@ input.todoitem-input {
   input {
     text-decoration:line-through;
   }
+  > span.typcn-tick-outline {
+    color:green;
+    opacity:1;
+  }
 }
 .important {
   input{
     background-color:lighten(yellow, 25%);
   }
+}
+
+
+.typcn-media-record-outline {
+  opacity:.5;
 }

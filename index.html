@@ -4,30 +4,63 @@
   <meta charset="UTF-8">
 
   <link rel="stylesheet" href="lib/typicons/typicons.css">
-  <link rel="stylesheet" href="assets/css/compiled.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 
   <title>Backbone To-Do's</title>
 </head>
 <body>
 
 <script type="text/dust" id="todoItemTemplate">
-  <div class="{?complete}complete{/complete} {?important}important{/important}">
-    <span class="typcn {?complete}typcn-tick-outline{:else}typcn-media-record-outline{/complete}"></span>
+  <div class="todo-item {?complete}complete{/complete} {?important}important{/important}">
+    <span class="complete-item-wrapper">
+      <span class="typcn {?complete}typcn-tick-outline{:else}typcn-media-record-outline{/complete}"></span>
+    </span>
     <input type="text" class="todoitem-input" name="itemname{_id}" value="{name}" disabled>
-    <span class="typcn typcn-times-outline"></span> <span class="typcn typcn-pin-outline"></span>
+    <span class="remove-item-wrapper">
+      <span class="typcn typcn-times-outline"></span>
+    </span>
+    <span class="highlight-item-wrapper">
+      <span class="typcn typcn-pin-outline"></span>
+    </span>
   </div>
 </script>
 
+<script type="text/dust" id="appLayoutTemplate">
+  <nav>
+    <p>
+      This is the nav
+    </p>
+  </nav>
+
+  <header>
+    <p>
+      This is the header
+    </p>
+  </header>
+
+  <div class="container">
+    <p>
+      App container
+    </p>
+  </div>
+
+  <footer>
+    <p>
+      This is the footer
+    </p>
+  </footer>
+</script>
 
 <div class="container">
   <h1>BB To-Dos</h1>
   <section class="todo-list">
-    <p>
-      <a href="" id="completeAll"><span class="typcn typcn-arrow-sorted-down"></span></a>
-      <input autofocus type="text" class="newToDo" name="newToDoItem" placeholder="What do you need to do???">
-      <a href="" id="createItem"><span class="typcn typcn-plus-outline"></span></a>
-    </p>
-    <div class="todo-items">
+    <div class="new-todo-input-wrapper">
+      <div class="complete-all-wrapper">
+        <span id="completeAll" class="typcn typcn-arrow-sorted-down"></span>
+      </div>
+      <input autofocus type="text" class="newtodo" name="newToDoItem" placeholder="What do you need to do?">
+    </div>
+    <div class="todo-item-wrapper">
       <!-- To-do items go here -->
     </div>
     <div class="todo-controls">
@@ -35,8 +68,6 @@
     </div>
   </section>
 </div>
-
-
 
 
 <!-- Bower Components -->
@@ -48,10 +79,9 @@
 <script src="lib/backbone.wreqr/backbone.wreqr.js"></script>
 <script src="lib/marionette/backbone.marionette.js"></script>
 <script src="lib/dustjs-linkedin/dust-full.min.js"></script>
+<script src="lib/marionette-dust/backbone.marionette.dust.js"></script>
 
 <!--App Files -->
-<script src="assets/js/templates.js"></script>
-
 <script src="assets/js/models.js"></script>
 <script src="assets/js/collections.js"></script>
 <script src="assets/js/views.js"></script>

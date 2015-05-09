@@ -1,0 +1,125 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,900);
+.container {
+  width: 600px;
+  margin: 0 auto;
+  text-align: center; }
+
+body {
+  -webkit-font-smoothing: antialiased; }
+
+body, input {
+  font-family: 'Lato', Helvetica, Arial, sans-serif; }
+
+h1 {
+  font-weight: 900; }
+
+input {
+  font-size: 1.618em;
+  font-weight: 300; }
+
+input.todoitem-input {
+  font-size: 1em; }
+
+.new-todo-input-wrapper {
+  text-align: left;
+  padding-left: 15px;
+  margin-bottom: 10px; }
+  .new-todo-input-wrapper .complete-all-wrapper {
+    text-align: left;
+    display: inline-block;
+    transition: all .3s ease;
+    opacity: .5; }
+    .new-todo-input-wrapper .complete-all-wrapper:hover {
+      transform: scale(1.2);
+      opacity: 1; }
+  .new-todo-input-wrapper input {
+    outline: none;
+    margin-left: 5px;
+    width: 77.5%;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 3px;
+    border: thin solid #39A4BC;
+    border-color: transparent; }
+    .new-todo-input-wrapper input:hover {
+      border: thin solid #39A4BC;
+      box-shadow: 0px 0px 10px rgba(57, 164, 188, 0.9); }
+
+body {
+  background-color: whitesmoke; }
+
+.todo-list {
+  padding: 10px;
+  border: thin solid gainsboro;
+  background-color: white;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1); }
+
+.highlight-item-wrapper, .remove-item-wrapper {
+  display: inline-block;
+  transition: all .3s ease;
+  opacity: 0; }
+  .highlight-item-wrapper:hover, .remove-item-wrapper:hover {
+    transform: scale(1.2); }
+
+.complete-item-wrapper {
+  opacity: 1; }
+  .complete-item-wrapper:hover {
+    transform: scale(1.2); }
+
+span.typcn {
+  cursor: pointer;
+  transition: all .3s ease;
+  font-size: 1.618em; }
+  span.typcn:hover {
+    opacity: 1; }
+
+.todo-item {
+  position: relative; }
+  .todo-item:hover > .remove-item-wrapper {
+    opacity: 1; }
+  .todo-item:hover > .highlight-item-wrapper {
+    opacity: 1; }
+
+.typcn-times-outline:hover {
+  color: #990000; }
+
+.typcn-pin-outline:hover {
+  color: #6666ff; }
+
+.typcn-tick-outline {
+  color: green; }
+
+input.todoitem-input {
+  padding: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 75%;
+  opacity: 1;
+  transition: all .3s ease;
+  border: thin solid blue;
+  border-color: transparent; }
+  input.todoitem-input:hover {
+    border: thin solid #39A4BC;
+    box-shadow: 0px 0px 10px rgba(57, 164, 188, 0.5);
+    transform: translateY(-2px); }
+  input.todoitem-input:disabled {
+    color: black;
+    opacity: .75;
+    user-select: none;
+    -webkit-user-select: none; }
+  input.todoitem-input:focus {
+    outline: none;
+    border: thin solid #39A4BC;
+    box-shadow: 0px 0px 20px rgba(57, 164, 188, 0.8); }
+
+.complete input {
+  text-decoration: line-through; }
+.complete > span.typcn-tick-outline {
+  color: green;
+  opacity: 1; }
+
+.important input {
+  background-color: #ffff80; }
+
+.typcn-media-record-outline {
+  opacity: .5; }

@@ -1,4 +1,40 @@
-.typcn-plus-outline {
-  font-size:2em;
-  vertical-align:middle;
+.new-todo-input-wrapper {
+  text-align:left;
+  padding-left:15px;
+  margin-bottom:10px;
+  .complete-all-wrapper {
+    text-align:left;
+    display:inline-block;
+    transition:all .3s ease;
+    opacity:.5;
+    &:hover {
+      transform:scale(1.2);
+      opacity:1;
+    }
+  }
+  input {
+    outline:none;
+    margin-left:5px;
+    width:77.5%;
+    display:inline-block;
+    padding:10px;
+    border-radius:3px;
+    border:thin solid #39A4BC;
+    border-color:rgba(0,0,0,0);
+    &:hover {
+      border:thin solid #39A4BC;
+      box-shadow: 0px 0px 10px rgba(#39A4BC, .9);
+    }
+  }
+}
+
+body {
+  background-color: whitesmoke;
+}
+
+.todo-list {
+  padding:10px;
+  border:thin solid darken(whitesmoke, 10%);
+  background-color:white;
+  box-shadow: 0px 10px 30px rgba(0,0,0,.1);
 }

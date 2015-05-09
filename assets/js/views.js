@@ -13,16 +13,14 @@ var ToDoItemView = Backbone.View.extend({
   //template: _.template(templates.todoitem),
   tpl: $('#todoItemTemplate').html(),
   tagName: 'article',
-  className: 'todo-item',
 
   initialize: function(){
-    console.log('todo item view init');                        //Compile template from the HTML string
-    this.compiledTpl = dust.compile(this.tpl, 'todoItemTpl');
+    this.compiledTpl = dust.compile(this.tpl, 'todo-item');   //Compile template from the HTML string
     //Register the template in Dust
     dust.loadSource(this.compiledTpl);
 
     //Forces a re-render on model change
-    this.model.bind('change', _.bind(this.render, this));
+    this.model.on('change', this.render, this);
   },
 
   events: {
@@ -45,25 +43,22 @@ var ToDoItemView = Backbone.View.extend({
 
 
   render: function (){
-    // var compiled = this.template(this.model.toJSON());
-    // this.$el.html(compiled);
-
     //USING DUST.js, rendering and compiling templates client side
-
     //// compiles, loads, and renders
     // dust.renderSource(src, { world: "Alpha Centauri" }, function(err, out) { ... });
 
     var data = this.model.toJSON();
     var _self = this;
-    dust.render('todoItemTpl', data, function(err, out) {
-    // place the HTML into the target DIV
+    dust.render('todo-item', data, function(err, out) {
       _self.$el.html(out);
     });
     return this;
   },
 
   enableEdit: function(e){
-    this.$el.find('input').prop("disabled", false).focus();
+    $('.todo-item-wrapper').find('.in-edit').prop('disabled', true);
+    this.$el.find('input').prop("disabled", false).focus().addClass('in-edit');
+
   },
 
   editItem: function(e){
@@ -92,7 +87,6 @@ var ToDoItemView = Backbone.View.extend({
     }
     this.model.set(editedItem);
     this.model.save();
-    this.render();
   },
 
   highlightItem: function(e){
@@ -109,16 +103,12 @@ var ToDoItemView = Backbone.View.extend({
     }
     this.model.set(editedItem);
     this.model.save();
-    this.render();
   },
 
   deleteItem: function(e){
-    console.log('deleting item');
     this.model.destroy();
     this.$el.remove();
   },
-
-
 
 
 });
@@ -132,18 +122,16 @@ var ToDoItemView = Backbone.View.extend({
 ///////To-Do List View (App view)
 ///////////////////////////////////////
 var ToDoListView = Backbone.View.extend({
-  el: $('section.todo-list'),
+  el: $('.todo-list'),
 
   initialize:function(){
-    console.log('todo list view init');
     this.addAllToDoItems();
   },
 
   events: {
 
-    //Add Items
-    "click #createItem" : "createToDoItem",
-    "keyup input.newToDo" : "enterToDoItem",
+    //Add Item
+    "keyup .new-todo-input-wrapper input" : "enterToDoItem",
 
     //Complete all and //Uncomplete all
     "click #completeAll" : "completeAllItems"
@@ -157,19 +145,19 @@ var ToDoListView = Backbone.View.extend({
 
   enterToDoItem: function(e){
     if(e.keyCode == 13){
-      this.createToDoItem(e);
+      this.createToDoItem();
     }
   },
 
   createToDoItem: function(e){
-    e.preventDefault();
 
     //Creates the new to do list item with some default values and its name from the input
     var newToDoItem = {
       name: $('section.todo-list').find('input[name="newToDoItem"]').val(),
       dateCreated: Date.now(),
       complete: false,
-      important: false
+      important: false,
+      priority: 1
     };
 
     //Creates a new ToDoItemModel w/ the above object as the data
@@ -201,7 +189,7 @@ var ToDoListView = Backbone.View.extend({
 
   addNewItem: function(item){
     var itemView = new ToDoItemView({ model : item });
-    this.$el.after(itemView.render().el);
+    this.$el.append(itemView.render().el);
   },
 
   addAllToDoItems: function(){
@@ -212,3 +200,22 @@ var ToDoListView = Backbone.View.extend({
 ///////////////////////////////////////
 ///////////////////////////////////////
 ///////////////////////////////////////
+
+
+var AppLayout = Backbone.Marionette.LayoutView.extend({
+  tpl: $('#todoItemTemplate').html(),
+
+  initialize: function(){
+    console.log('view init');
+
+    this.compiledTpl = dust.compile(this.tpl, 'app-layout');   //Compile template from the HTML string
+    //Register the template in Dust
+    dust.loadSource(this.compiledTpl);
+  }
+
+  //Regions
+  ////Header
+  ////Footer
+  ////Menu
+  ////App container
+});

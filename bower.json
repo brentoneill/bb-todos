@@ -21,7 +21,8 @@
     "typicons": "~2.0.7",
     "marionette": "~2.4.1",
     "dustjs-linkedin": "~2.7.1",
-    "moment": "~2.10.2"
+    "moment": "~2.10.2",
+    "marionette-dust": "~0.1.6"
   },
   "install": {
     "path": "lib"
